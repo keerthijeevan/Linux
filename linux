@@ -1,0 +1,383 @@
+ 
+                                                                               THE LINUX COMMANDS FOR THE DEVEOPS 
+
+                                             
+The linux consists contains in the center we have kernel and later it consists of commands so in  
+
+The core structure of the linux is application->shells->kernel->hardware (Shell accepts commands and passes them to kernel.)
+
+linux command for the hardware is 1)top ,2)df -h ,3)free -h  top is used for Live system activity (real-time monitoring).
+
+linux command for computer is - cd to change the directory
+ ls is used for the -ls   
+
+what is meant by linux kernal =we want a program which talk to the kernal which is called shell,we have shell coomand whixh well talks to the kernal 
+
+what is meant by c=what are the file which are required to run the the cpu the booatloader will run those files
+  
+
+what is meant by file system in the linux?
+solution for this question= everything in the linux start with root file 
+
+there are certain command in the linux are : cd / , ls ,,cd user 
+
+there are different type of processor are there in the linux    (the processor in the linux i do not know bro)
+
+                                                    DAY 2       
+
+Linux command 
+
+1)if you to know the date of the today in the terminal write the date in the terminal so we can get the date in the terminal
+
+2)ls command = list everything in the directory 
+
+3)to create a folder we use mkdir
+
+4)ls -l it will tell the detail about that directory 
+
+-   rw-   r--   r--
+|   |     |     |
+|   |     |     └── others permissions
+|   |     └──────── group permissions
+|   └────────────── owner permissions
+└────────────────── file type
+
+
+to go inside in the work directoery or where are you present know  pwd
+
+Linux command 
+
+1)if you to know the date of the today in the terminal write the DATE in the terminal so we can get the date in the terminal
+
+2)ls command = list everything in the directory 
+
+3)to create a folder we use mkdir
+
+4)ls -l it will tell the detail about that directory (it tell the permission of that file)
+
+to go inside in the work directoery or where are you present know  pwd
+
+in the working directory i want to create a file i can use a command called touch <filename>
+
+to change the directory we use the command called cd
+
+how to come back the directory we use the coomand called cd ..
+
+in the bin we have binary to go there cd bin
+
+to delete the file we use this command file rm <file name> we use this it will deleted
+
+to delete  the folder we use this coomand rm -r <folder name>
+
+to read the file we use  this command called cat <file name>
+
+to print we use this command  echo "write something here">file name (important in the shell scripting bro)
+
+if we have zip file to see inside this file we use this command zcat
+
+to print first top five line in the file we use this command called  head<file name>
+
+to print bottom line of the file we use this command called tail<file name>
+
+imagine we have a big file we cannnot see all this file manully then we the command called   less <file name> were the big file convert into the small files and same way we have another command called big <file name>
+
+if we want to copy the fiel from one folder to another we use this command called  cp <source file,destination file>
+
+if there is a sceniro i am in the home directory i want to copy the one file which is out of the home directory then we willl give the dource file file and later we push this sourcw file into the distion file 
+the command for this is cp <source folder/source file destion file/
+
+if the cloud folder should copt ot the devops folder we use this command  cp -r cloud/ develops
+
+how to rename the file or folder we use this command mv <file original name>/<file new name>
+
+to count total number of words and space in the file we use this command wc <file name>
+
+what is meant by hard link and soft link ?
+solution :  ln stand for link we here we can create short cut to create a soft link we use this ln -s <path> write the file name to consisder as filename and to see the in detail we use this ls -ltr
+
+what is the diffference between hardlink and soft liink durning hardlink we have created a shortcut to the main folder if the main folder get deleted then the hardlink will be there were as in the soft link if the main folder is deleted then the softlink will also get deleted
+
+to create a hardlink we use this command called ln where as ln -s is used foe softlink because the main advantage of this link is to create a shortcut if you are using the softlink then if the man folder is deleted the it will effecte the softlink also where as in the hardlink if the main folder deleted then it will not effect the main folder we should know the path of the link
+ 
+for example if you have a file called jeevan in that you have some content like my name is keerthi jeevan then you what to see only my then you should use cut command called cut -b 1-2 which means it will cut 2 bytes where each letter is one byte show this is cut command for you 
+
+if you print something and at the same type what ever you printed it should be store in the file at that time only then we use this command called echo "my name is jeevan" |teen <file name you want ot store>  where as  you  echo is used for to print and for teen is used for store the content in the file at the same time
+
+we have command to sort in the alphabetic order that the command is sort  and there is a command do sort if it contain any duplicate we can remove the duplicate and we can sort by using the command called sort -u file and to sort in the reverse we use the command calles sort -r <file name>
+
+ the difference in both the folder we use this command called diff <file name> <file name>
+
+there is also a editor which is used to edit the content in the terminal that is vi editor and to come to the the normal terminal we use this : wq there are certain commmand they are
+:w     → save                            
+:q     → quit
+:wq    → save and quit                  these are very important in the shell scripting we are using them in vim editor
+:q!    → force quit
+
+
+to change the directory we use the command called cd
+
+how to come back the directory we use the coomand called cd ..
+
+in the bin we have binary to go there cd bin
+
+to delete the file we use this command file rm <file name> we use this it will deleted
+
+to delete  the folder we use this coomand rm -r <folder name>  -r is one of the important tool we use in the linux bro
+
+to read the file we use  this command called cat <file name>
+
+to print we use this command  echo "write something here"
+
+to write this in the file we use this command called  
+
+if we have zip file to see inside this file we use this command unzip -p marvel.zip flash.txt | less(before this upper command we needed to know what are the file insids the zip folder so we use this command called unzip and zip file name then we can get the file later we can use that below command bro)
+
+if we have zip file to see inside this file we use this command unzip -l marvel.zip flash.txt | less
+                                                                                                                                                                                i should understand the zip folder how does it take place and so on
+
+if we have zip file to see inside this file we use this command unzip -p marvel.zip flash.txt | less
+
+how to create zip only for file this is the command for this zip myfiles.zip a.txt b.txt c.txt
+
+how to create zip only for folder this is the command zip -r folder.zip myfolder
+
+to print first top five line in the file we use this command called  head<file name>
+
+to print bottom line of the file we use this command called tail<file name>
+
+imagine we have a big file we cannnot see all this file manully then we the command called   less <file name> were the big file convert into the small files and same way we have another command called big <file name>
+
+if we want to copy the fiel from one folder to another we use this command called  cp <source file,destination file>
+
+if there is a sceniro i am in the home directory i want to copy the one file which is out of the home directory then we willl give the dource file file and later we push this sourcw file into the distion file 
+the command for this is cp <source folder/source file destion file/
+
+if the cloud folder should copt ot the devops folder we use this command  cp -r cloud/ develops
+
+  
+ we want to move not copy  folder we use this command  
+
+how to rename the file or folder we use this command mv <file original name>/<file new name>
+
+to count total number of words and space in the file we use this command wc <file name>
+
+what is meant by hard link and soft link ?
+solution :  ln stand for link we here we can create short cut to create a soft link we use this ln -s <path> write the file name to consisder as filename and to see the in detail we use this ls -ltr
+
+what is the diffference between hardlink and soft liink durning hardlink we have created a shortcut to the main folder if the main folder get deleted then the hardlink will be there were as in the soft link if the main folder is deleted then the softlink will also get deleted
+
+to create a hardlink we use this command called ln where as ln -s is used foe softlink because the main advantage of this link is to create a shortcut if you are using the softlink then if the man folder is deleted the it will effecte the softlink also where as in the hardlink if the main folder deleted then it will not effect the main folder we should know the path of the link
+ 
+for example if you have a file called jeevan in that you have some content like my name is keerthi jeevan then you what to see only my then you should use cut command called cut -b 1-2 which means it will cut 2 bytes where each letter is one byte show this is cut command for you 
+
+if you print something and at the same type what ever you printed it should be store in the file at that time only then we use this command called echo "my name is jeevan" |teen <file name you want ot store>  where as  you  echo is used for to print and for teen is used for store the content in the file at the same time
+
+we have command to sort in the alphabetic order that the command is sort and also to see the difference in both the folder we use this command called diff <file name> <file name>
+
+there is also a editor which is used to edit the content in the terminal that is vi editor and to come to the the normal terminal we use this : wq there are certain commmand they are
+:w     → save
+:q     → quit
+:wq    → save and quit(these is one of the command which is used for shell scripting)
+:q!    → force quit
+
+                                         important concept will rise  from now 
+
+1) ssh(secure shell)=first if you want to access somebody laptop first you should have acess towards the ssh no 22 of that computer which you want to acess
+
+✅ Correct version:
+
+YOU generate a key pair
+
+Private key → stays with you
+
+Public key → copied to friend’s laptop
+
+to create a public key and also the private key we use this command called ssh-keygen
+
+to read the both the public and private key we use these command called =ls ~/.ssh which is very important
+
+by using this command called df where we track the total uses data in the laptop can noticed in the computer system and we also use df -h and which give in the detail and if you use this command called du . then you get data of that particular directory 
+
+top is command which will tell all the process and it will also tell which process are running and which process are stable and so on 
+
+what is fuser command is used for tells you which process (program) is using a particular file, folder, or port.
+and also there is anothe command that will delete the file name that is fuser -k filenamels ~
+it will delete the particlur file on that file is delted only the prosess which is running is deleted
+
+free command which total number of the disk space in the computer  or you can use free -h to tell the uses of the ram in human readable form ans also there is command called nohup free -h it will create a file called nohup in that it will store the the ram detail so nohup free -h is also command
+
+cat command is used to the read the file directly form the editor and vmstat tell all the detail about virtual memory and will give the detail
+
+
+by using this command called df where we track the total uses data in the laptop can noticed in the computer system and we also use df -h and which give in the detail and if you use this command called du . then you get data of that particular directory 
+
+top is command which will tell all the process and it will also tell which process are running and which process are stable and so on 
+
+what is fuser command is used for tells you which process (program) is using a particular file, folder, or port.
+and also there is anothe command that will delete the file name that is fuser -k filename
+it will delete the particlur file on that file is delted only the prosess which is running is deleted
+
+free command which total number of the disk space in the computer  or you can use free -h to tell the uses of the ram in human readable form ans also there is command called nohup free -h it will create a file called nohup in that it will store the the ram detail so nohup free -h is also command
+
+cat command is used to the read the file directly form the editor and vmstat tell all the detail about virtual memory and will give the detail  and where as vim is one of the best editor where all the shell scripting command are used there only bro)
+
+
+                                          USER AND FILES MANAGEMENT 
+
+
+there is command called uname which is used for to know which os is using in the sysytem
+and also
+
+ there is command which tells how time the system using uptime and also 
+
+if you want to know the username who is working on the system hen we can use suchas whoami 
+
+if you want the date and also the time date and also other detail we can use the commmand called who and
+
+ also another command which is very useful called which command which is used to know the location we use this which command
+
+id is command used for  id = “Show my Linux identity (user + groups).”
+
+power linux command in the linux is sudo(suoer user do) we cannot use the root user dirctly because due to the secruity reason for this we use these sudo command for shorttime we can acess  root power directly for that is the reason we use this command
+
+there is also an another command called apt which is act as a playsstore for the linux terminal apt is Ubuntu’s package manager used to install, update, upgrade, search, and remove software.
+
+the steps for the install new thing in the terminal is give below
+
+(1)sudo apt update
+
+(2)sudo apt install package_name
+
+(3)package_name --version
+
+and these is also command which tell the full detail about your command  is cat /etc/os-release
+
+sudo apt remove app_name  is the command used for the delete the particular app name in the terminal bro
+
+rm -rf myfolder is the command to delete the particular folder where for the deleting of the file there is a particular command is rm file_name
+
+like for ubantu we have apt command which is used for package mananger like this we have different type of package mannager they are yum,dnf,pacman,portage,rpm which are used differnt type linux 
+
+                                       user and group management(it is very important concept)
+
+
+how to add new user we use this command called sudo useradd -m <file name> i want  this user should have passwaord for protection then i use this command sudo passwd <file name> and also i want to change from one user to another i use this command called su(switch user) <file name>
+
+if i am in the another user if i want to enter into the old user which in real one for example consider there are two user one is jarvise(main user) and other one is ironman(another user) if i want to jump from ironman to jarvise then i should use exit  command 
+
+if we want to delete the user name me use this command called sudo userdel -r <file name> if we want to see the user we created we write the command called cat /etc/passwd 
+
+how to create a group in the linux we use this command called sudo groupadd <filename> and to see the groups we created we use this command called cat /etc/group(BECAUSE GROUP IS A FILE )
+
+if you have a file  which is not in the group then we can add the file in that group by using these commmand sudo chown username:group name file name and also to check whether they are in the that group we use this command called stat filename
+
+how to add the user in the group we use this command called sudo gpasswd  -a <filename> <group name>
+
+imgine that if you mutiple user if you want to add all of them in same group you use the command called sudo gpasswd -m <all filme name alomg with commo >  <group name>
+
+there is command to delete the group we use this command called sudo groupdel <group name>
+
+                                                  file permission commands
+
+ 
+there is a command called ls -l which is useful for It lists files and folders in the current directory in long (detailed) format for the above command we get the result as drwxrwxr-x(775)
+
+to change the file permission we use this command called chmod  (new file number)  file name the permisson of the file name get changed 
+
+there is another command  which is called umask  these are the by defaiult agrument where the new filw is created it will give the default permission for the file 
+
+chown is is the command is used for change the ownership  sudo chown <which folder you want > file name
+
+there is another command called sudo chgro <file name>which is used to chnage the group we use this command
+
+chown → change owner
+
+chgrp → change group
+
+chmod → change permission
+                                                 compression command 
+
+there are certain command zip gunzip and also the gzip command which is used for
+
+1)if you have multiplle file if you want too sended all the file to someone then you should use zip command basically you create a zip later you will store all the file in the zip command and later on we transfer the zip folder  zip -r <zip folder name>.zip   <from whixh folder you want to transfer>
+
+
+-r or -R = “include all subfolders and their contents.” is one of the important point foe the kunax sysytem
+
+how to acess the unzip is the linux we use the command called unzip <filename>
+
+i could not understand about the tar so  not write this here you should focus on that
+
+**cp -r source_folder destination_folder which is used for copy the source folder to and later write the destention folder**
+
+                                    FILE TRANSFER COMMAND TO THE SERVER
+
+1)sudo systemctl status ssh
+2)sudo systemctl start ssh
+3)sudo systemctl stop ssh
+
+                            how to transfer file from one cmputer to another computer 
+
+Go to the any folder and later  create a file in that which is called source file 
+
+**how to writing something in the source file we use this command caled echo "write what you ">file name> and also we can do edit and write something by using nano file name
+
+later go to another diirectory and create a folder which is called destion folder 
+
+and later copy the path of the destion file by usnig the command called pwd  and later the write the below command
+
+scp filename username@ip_address:/full/path/ (file name=source file and where as path name is destination path)
+
+**NOTE whenyou are transfering from one user to another user then we should change the command for ssh we should write this as scp filename.txt (the user which you want to push not the user you have now)@ip_adresss:/full?path(destion file the user you wrote there)
+
+important once the file is transfer from souce file to destination file later ssh i=should close because the port 22 is opened
+
+
+we can enter into another system by using ip address syntax for this :sshusername@ipaddress
+
+if you want to transfer the file from the local to server or vice verse we use the key pair concept where the password process is not work there 
+
+1)from local computer to the host server we use this commmand
+
+scp -i key.pem file.txt user@ip:/home/user/(here i is the identity file, key.pem =secret file,file.txt=user name fiile) but user is remote user not the local user and the file path is also the remote path not the user file path
+
+2)from remote computer to the local computer we use this command
+
+scp -i key.pem user@REMOTE_IP:/path/to/file.txt /local/path/([ REMOTE SERVER ]                         [ LOCAL COMPUTER ]
+ubuntu@13.234.56.78:/home/ubuntu/report.txt  --->  /home/jarvise/Downloads/f
+        (file lives here)                         (file will come here)
+
+what is the use of this command called rsync
+
+to transfer the file from one user to anthor user we use this command 
+
+rsync -av -r filenam.txt username@127.0.0.1:/home/file /path
+
+From local to remote user we use this command :
+
+rsync -av source_path user@REMOTE_IP:/remote/path/
+((where source_path =the things we need to sent file we need to know about the file and user=the remote user and remote ip address and last is the destention path)
+
+From remote to local user we use this command
+rsync -av ubuntu@54.213.88.102:/var/www/html/ /home/jarvise/website_backup/
+where ubuntu@54.213.88.102:/var/www/html/ ==it is belong the remote user and it is ip address and file locartion or its path where as rf / =it is belong to the local path where should be the file should be located and that all 
+
+NOW ONE OF THE IMPORTANT CONCEPT HOW TO TRANSFER FROM one user to another user
+
+step :01 
+          first select the username in which i needed to geneerate the keygen
+                   ssh-keygen
+step :02
+          by using this command called ssh-keygen it will generate both the key 
+            one is public key
+             one is private key
+to see this file we use this command called ls ~/.ssh      and there is also command called to remove this keygen file is rm -rf ~/.ssh
+
+step:03
+          later the public key we needed to push to another user where we needed to pass the file by using command called ssh-copy-id ironman@localhost here i used the ironman as user you can use your username
+
+step:04
+          it will transfer to another user which called ironman we needed to come to your user ironman later web use 
+
+step:05
+       scp jeevan.txt ironman@localhost://home/ironman/ant    here the file name is jeevan.cpp and the later is the destination address we needed to enter the password again and again

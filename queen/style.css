@@ -1,0 +1,18 @@
+body {
+  background-color: #121212;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  padding: 2rem;
+}
+
+h1, h2, h3 {
+  color: #00ffff;
+}
+
+code {
+  background-color: #1e1e1e;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: monospace;
+}
