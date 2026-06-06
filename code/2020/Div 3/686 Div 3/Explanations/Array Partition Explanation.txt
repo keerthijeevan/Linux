@@ -1,0 +1,210 @@
+Whenever we have to compute triplets,
+it's always a good idea to iterate over the middle to use symmetry.
+
+Let us iterate over A[i]. Suppose A[i] is the minimum of some segment.
+
+Let L[i], R[i] be the left and right border of A[i].
+They denote the maximum range [L[i], R[i]] in which A[i] can be the minimum.
+
+------
+
+We can precompute L[i], R[i] in O(n) time using a stack.
+
+Initially, the stack has a 0.
+We will keep popping the stack till the top is < A[i]
+Finally, the top of the stack will be the first element on the left that is > A[i]
+
+We do the same thing on the right.
+
+-----
+
+void compress_coordinates(int no_of_elements)
+{
+    vector <int> sorted_A(no_of_elements + 1);
+    for(int i = 1; i <= no_of_elements; i++)
+    {
+        sorted_A[i] = A[i];
+    }
+
+    sort(sorted_A.begin(), sorted_A.end());
+
+    map <int, int> label;
+    label[sorted_A[1]] = 1;
+    for(int i = 2; i <= no_of_elements; i++)
+    {
+        label[sorted_A[i]] = (sorted_A[i] == sorted_A[i - 1] ? label[sorted_A[i - 1]] : label[sorted_A[i - 1]] + 1);
+    }
+
+    for(int i = 1; i <= no_of_elements; i++)
+    {
+        A[i] = label[A[i]]; //cout << A[i] << " ";
+
+        indices[A[i]].push_back(i);
+    }
+}
+
+-----
+
+The prefix either ends at L[i] or at some occurrence of A[i], whichever comes later.
+We will iterate over all indices p in [L[i], i] such that A[p] = A[i]
+
+And check if the maximum in [1, p] = A[p]
+
+We will also iterate over all indices s in [i, R[i]], such that A[s] = A[i]
+And check if the maximum in [s, n] = A[s]
+
+-----
+
+1. In order to store the indices of all the elements in a vector,
+we will do coordinate compression in order to use the array elements as indices
+
+2. We will use a prefix maximum array and a suffix maximum array in order to get
+the prefix maximum and suffix maximum in O(1) time.
+
+3. In order to clear the time limit, we will not check every single index of A[i]
+for every i.
+
+The prefix maximum has the property that it only increases.
+Suppose (j < k). Then Prefix Maximum[j] <= Prefix Maximum[k]
+
+So, if A[j] = A[k] = A[i]
+
+And Prefix Maximum[k] = A[i], then Prefix Maximum[j] = A[i]
+
+If we want to find an x, such that Prefix Maximum[x] = A[i],
+we only need to look at the first occurrence of A[i] in the array.
+
+But since we need the minimum of the second segment minimum to be A[i],
+we will look for the first occurrence of A[i] >= (L[i] - 1)
+
+We will do a similar thing for the suffix.
+
+-----
+
+For every A[i], we will be checking at most 4 indices
+
+1. The first index to the right of (L[i] - 1)
+2. L[i] - 1
+3. The first index to the left of (R[i] + 1)
+4. R[i] + 1
+
+So, the entire loop runs in O(n) time, with a possible O(log n) factor for
+finding the indices closest to (L[i] - 1) and (R[i] + 1)
+
+-----
+
+void solve()
+{
+    int no_of_elements;
+    cin >> no_of_elements;
+
+    for(int i = 1; i <= no_of_elements; i++)
+    {
+        cin >> A[i];
+
+        indices[i].clear();
+    }
+
+    compress_coordinates(no_of_elements);
+
+    vector <int> prefix_maximum(no_of_elements + 1);
+    vector <int> suffix_maximum(no_of_elements + 5);
+    compute_prefix_and_suffix_max(no_of_elements, prefix_maximum, suffix_maximum);
+
+    vector <int> left_border(no_of_elements + 1);
+    vector <int> right_border(no_of_elements + 1);
+    compute_borders(no_of_elements, left_border, right_border);
+
+    for(int i = 1; i <= no_of_elements; i++)
+    {   //cout << "For " << i << " is minimum in [" << left_border[i] << " " << right_border[i] << "]\n";
+        if(indices[A[i]].size() < 3 || i == indices[A[i]][0] || i == indices[A[i]].back())
+        {
+            continue;
+        }
+
+        if(prefix_maximum[left_border[i] - 1] > A[i] || suffix_maximum[right_border[i] + 1] > A[i])
+        {
+            continue;
+        }
+
+        int p = upper_bound(all(indices[A[i]]), left_border[i] - 2) - indices[A[i]].begin();
+        if(indices[A[i]][p] == i)
+        {
+            p--;
+        }
+
+        int s = lower_bound(all(indices[A[i]]), right_border[i] - 1) - indices[A[i]].begin();
+        if(s == indices[A[i]].size() || indices[A[i]][s] > right_border[i] + 1)
+        {
+            s--;
+        }
+
+        while(s < indices[A[i]].size() && indices[A[i]][s] <= i)
+        {
+            s++;
+        }
+
+        int prefix, suffix;
+        //cout << "p = " << indices[A[i]][p] << " s = " << indices[A[i]][s] << "\n";
+        int left_possible = false;
+
+        while(p >= 0)
+        {
+            prefix = max(indices[A[i]][p], left_border[i] - 1);
+            //cout << "Prefix = " << prefix << " Maximum = " << prefix_maximum[prefix] << "\n";
+            if(prefix_maximum[prefix] == A[i])
+            {
+                left_possible = true;
+                break;
+            }
+
+            if(p < left_border[i] - 1)
+            {
+                break;
+            }
+
+            p--;
+        }
+
+        if(!left_possible)
+        {
+            continue;
+        }
+
+        int right_possible = false;
+
+        while(s < indices[A[i]].size())
+        {
+            suffix = min(indices[A[i]][s], right_border[i] + 1);
+            //cout << "Prefix = " << suffix<< " Maximum = " << suffix_maximum[suffix] << "\n";
+
+            if(suffix_maximum[suffix] == A[i])
+            {
+                right_possible = true;
+                break;
+            }
+
+            if(s > right_border[i] + 1)
+            {
+                break;
+            }
+
+            s++;
+        }
+
+        if(!right_possible)
+        {
+            continue;
+        }
+
+        int part_1 = prefix, part_2 = (suffix - 1) - prefix;
+        int part_3 = no_of_elements - (part_1 + part_2);
+
+        cout << "YES\n";
+        cout << part_1 << " " << part_2 << " " << part_3 << "\n";
+
+        return;
+    }
+
+    cout << "NO\n";
+}

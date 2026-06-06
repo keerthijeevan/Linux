@@ -1,0 +1,153 @@
+
+Let f(i, G) be the number of ways to fill up positions from i to N such that  A > B
+
+The idea is that if you fill position i for equality, then at some point in between (i + 1, N) ... A > B
+
+If you fill i such that A[i] > B[i], what comes after doesn't really matter.
+
+-----------------------------------------------------------------------------------------
+
+When do you say that A > B ? (For example, why do we say that 112345 is greater that 112333 ?
+
+This is how we compare. First, we check if the lengths are equal. If they aren't the longer number is greater. 
+
+If they are equal, then there must be some position i, for which A[i] =/= B[i], and all j < i A[j] = B[j]
+
+That is, there is some FIRST position where the strings aren't equal. The strings share a prefix before that. 
+
+(In this case, it is 1123 - this is the common prefix. Note that if we were comparing 2562 and 7891, then the length of the common 
+prefix is 0 Becasue the first unequal position is the first !)
+
+Now, we want to place a character at the i-th position of A, or B, or both, or neither (If they are both non-zero). 
+
+How do we do this ?
+
+Suppose A[i] = 0, and we fill a character at A[i] so that A[i] = B[i]
+
+For instance, 
+A =  0 1 2
+B =  5 1 0
+
+Suppose we fill A[1] = 5, then it means strings A and B are equal till position 1, and the number of ways of making A > B
+
+is equal to the number of ways of making A > B, by filling characters from (i + 1). There has to be SOME position after i + 1, after which A > B. So, we simply add f(i + 1, G) as that is exactly the information it contains.
+
+So, f(i, G) = f(i + 1, G)
+
+If we set A[i] = 6, then A is already greater than B .... And the 0s after position i can be filled by any of the m digits, and
+A will still be greater than B.
+
+f(i, G) = (M - B[i])*f(i + 1, ANY_WAY)
+
+Because there are (M - B[i]) ways of filling position i so that A[i] > B[i]
+
+And only one way of filling A[i] so that A[i] = B[i]
+
+Ultimately, f(i, G) = f(i + 1, G) + (M - B[i])*f(i + 1, ANY_WAY)
+
+I have just shown the case of A[i] = 0 and B[i] =/= 0.
+
+A similar analysis can be done to all possibilities. Just think how can we fill A[i] and B[i] ... How can we fill them for A = B, (In that case, count f(i + 1, G) and How can we fill them for A > B
+
+------------------------------------------------------------------------------------------
+
+f(i, A) be all the number of ways to fill up positions from i to N.
+
+if A[i] = 0 and B[i] = 0, 
+
+	then we can fill up the same character in both A and B. We get C(M, 2) f(i + 1, A) or equal here M f(i + 1, G)
+
+if A[i] = 0
+
+	f(i, G) = (M - B[i]) f(i + 1, A) + 1. f(i + 1, G)
+
+if B[i] = 0
+
+	f(i, G) = (A[i] - 1) f(i + 1, A) + 1. f(i + 1, G)
+
+if A[i] > B[i]
+
+	f(i, G) = f(i + 1, A)
+
+if A[i] < B[i]
+
+	f(i, G) = 0
+
+if A[i] = B[i]
+
+	f(i, G) = f(i + 1, G)
+
+----------------------------------------------------------------------------
+
+int main()
+{
+    const int MOD = 1e9 + 7;
+
+    int length, no_of_alphabets;
+    scanf("%d %d", &length, &no_of_alphabets);
+
+    vector <int> A(length + 1);
+    for(int i = 1; i <= length; i++) scanf("%d", &A[i]);
+
+    vector <int> B(length + 1);
+    for(int i = 1; i <= length; i++) scanf("%d", &B[i]);
+
+    int no_of_zeroes = 0;
+    for(int i = 1; i <= length; i++) no_of_zeroes += (A[i] == 0) + (B[i] == 0);
+
+    const int ANY_WAY = 0, GREATER = 1;
+    typedef vector <long long> v_ll;
+    vector <v_ll> no_of_ways(length + 5, v_ll(2, 1));
+
+    no_of_ways[length + 1][ANY_WAY] = 1;
+    no_of_ways[length + 1][GREATER] = 0;
+
+    for(int i = length; i >= 1; i--)
+    {
+        no_of_ways[i][ANY_WAY] = no_of_ways[i + 1][ANY_WAY];
+
+        if(A[i] == 0) no_of_ways[i][ANY_WAY] = (no_of_ways[i][ANY_WAY]*no_of_alphabets)%MOD;
+        if(B[i] == 0) no_of_ways[i][ANY_WAY] = (no_of_ways[i][ANY_WAY]*no_of_alphabets)%MOD;
+
+        if(A[i] == 0 && B[i] == 0)
+        {
+            long long choose_different_alphabets = choose_2(no_of_alphabets);
+            long long choose_same_alphabet = no_of_alphabets;
+
+            no_of_ways[i][GREATER] = choose_different_alphabets*no_of_ways[i + 1][ANY_WAY] + choose_same_alphabet*no_of_ways[i + 1][GREATER];
+        }
+        else if(A[i] == 0)
+        {
+            no_of_ways[i][GREATER] = (no_of_alphabets - B[i])*no_of_ways[i + 1][ANY_WAY] + no_of_ways[i + 1][GREATER];
+        }
+        else if(B[i] == 0)
+        {
+            no_of_ways[i][GREATER] = (A[i] - 1)*no_of_ways[i + 1][ANY_WAY] + no_of_ways[i + 1][GREATER];
+        }
+        else if(A[i] > B[i])
+        {
+            no_of_ways[i][GREATER] = no_of_ways[i + 1][ANY_WAY];
+        }
+        else if(A[i] == B[i])
+        {
+            no_of_ways[i][GREATER] = no_of_ways[i + 1][GREATER];
+        }
+        else if(A[i] < B[i])
+        {
+            no_of_ways[i][GREATER] = 0;
+        }
+
+        no_of_ways[i][ANY_WAY] %= MOD;
+        no_of_ways[i][GREATER] %= MOD;
+    }
+
+    long long numerator = no_of_ways[1][GREATER];
+    long long denominator = power(no_of_alphabets, no_of_zeroes, MOD);
+
+    long long answer = numerator*inverse(denominator, MOD);
+    answer %= MOD;
+
+    printf("%I64d\n", answer);
+
+    return 0;
+}

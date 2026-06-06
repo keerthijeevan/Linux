@@ -1,0 +1,61 @@
+Let us represent the activities of each student as a d-tuple. 
+(b1, b2, ... bd), where bi represents the bus taken on day i.
+
+Each day you can take k buses. Overall, there are k^d distinct d-tuples. 
+
+If two tuples are the same, then it means two students take the same bus everyday.
+
+If k^d < N, then by the pigeonhole principle there will be two d-tuples that are the same at every spot.
+
+So, if k^d < N, then it is not possible. 
+
+int possible(int people, int buses, int days)
+{
+    //Check if k^d > n
+    for(int power = 1, d = 0; d <= days; power *= buses, d++)
+    {
+        if(power >= people)
+            return true;
+    }
+
+    return false;
+}
+
+-------------------------------------------------
+
+Otherwise, let us generate the first N numbers of length d in base k. 
+
+(In other words, we're visiting the d-tuples in lexicographic order.)
+
+
+for(int p = 0; p < no_of_people; p++)
+    {
+        for(int d = 0; d < no_of_days; d++)
+        {
+            arrangement[p][d] = (p == 0 ? 0 : arrangement[p - 1][d]);
+        }
+
+        for(int d = no_of_days - 1; d >= 0; d--)
+        {
+            arrangement[p][d]++;
+            arrangement[p][d] %= no_of_buses;
+
+            if(arrangement[p][d] != 0)
+                break;
+        }
+    }
+
+-----------------------------------------
+
+It's easy to generate this with respect to d-tuples, but the output must be in n-tuples
+
+for(int d = 0; d < no_of_days; d++)
+{
+        for(int p = 0; p < no_of_people; p++)
+	{
+            printf("%d ", arrangement[p][d] + 1);
+	}
+        printf("\\n");
+    
+}
+ 
