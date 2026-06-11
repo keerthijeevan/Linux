@@ -145,3 +145,24 @@ int main(){
     return 0;
 }*/
 
+/* #include<iostream>
+using namespace std;
+
+int fibc(int num)
+{
+    if(num==0)
+        return 0;
+
+    if(num==1 || num==2)
+        return 1;
+
+    return fibc(num-1) + fibc(num-2);
+}
+
+int main()
+{
+    cout << fibc(4);
+
+    return 0;
+}
+*/
